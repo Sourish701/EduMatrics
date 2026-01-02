@@ -57,4 +57,6 @@ def analysis(i, i1, i2, i3):
 # 5. If there is only one student, handle that case
     if len(cumulative_totals) == 1:
         sole_student = list(cumulative_totals.keys())[0]
-        print(f"\nNOTE: Only one student ({sole_student}) found in records. No comparative analysis possible.")        
+        print(f"\nNOTE: Only one student ({sole_student}) found in records. No comparative analysis possible.")
+
+            

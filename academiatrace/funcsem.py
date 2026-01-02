@@ -162,6 +162,7 @@ def sem_marks():
                 g3=g3+j3
                 h3=g3/5
             print(f"Average marks for 4th sem of {search_name2} is {h3}")
+    
     return i,i1,i2,i3
     
 

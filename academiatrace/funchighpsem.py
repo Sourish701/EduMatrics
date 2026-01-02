@@ -46,4 +46,5 @@ def highest_in_4thsem(i3):
         if total_marks > max_total_marks:
             max_total_marks = total_marks
             top_student_name = name
-    print(f"\nThe highest total marks in 4th Sem: {max_total_marks} was received by: {top_student_name}")
+    print(f"\nThe highest total marks in 4th Sem:  {max_total_marks} was received by: {top_student_name}")
+

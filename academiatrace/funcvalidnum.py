@@ -20,4 +20,4 @@ def get_valid_num_students():
         except ValueError:
             # Not a number (letters/symbols)
             flash("Invalid amount! Please enter numeric values only.")
-            prompt = "Please enter number of students again: "
+            prompt = "Please enter number of students again: "            

@@ -42,3 +42,4 @@ def find_highest_per_subject(i, i1, i2, i3): # Receives all dictionaries
     print(f"Subject: {chosen_sub.capitalize()}")
     print(f"Highest Marks: {max_subject_mark}")
     print(f"Received by: {', '.join(top_stud_names)}")
+    print(f"---------------------------------------------")

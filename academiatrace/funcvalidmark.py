@@ -21,4 +21,6 @@ def get_valid_marks(subject_name):
             # Not a number (letters/symbols)
             flash("Invalid marks! Please enter numeric values only.")
             prompt = "Please enter marks in {subject_name} again: "
+
+            
            
