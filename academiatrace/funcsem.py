@@ -1,168 +1,109 @@
-# Function to input and store marks for multiple semesters and calculate averages
 from funcvalidmark import get_valid_marks
 from funcvalidname import get_valid_names
 from funcvalidnum import get_valid_num_students 
-def sem_marks():
-    s=[]
-    i={}
-    k=0
-    stud_names=[]
-    n=get_valid_num_students()
-    #For 1st Sem
-    for x in range(n):
-        print(f"--- Entering marks for (1st Sem) ---")
-        names=get_valid_names()
-        stud_names.append(names)
-        b=get_valid_marks("physics: ")
-        c=get_valid_marks("chemistry: ")
-        d=get_valid_marks("maths: ")
-        e=get_valid_marks("computer: ")
-        f=get_valid_marks("biology: ")
-        s.append(b)
-        s.append(c)
-        s.append(d)
-        s.append(e)
-        s.append(f)
-        i[names]=s[k:k+5: ]
-        k=k+5
-    print(i)
-    g=0
-    # Average for 1st Sem
-    d = input("Whose average marks do you want to find?: ")
-    if d not in i:
-        from functime import flash_and_input
-        
-        d = flash_and_input("Invalid student name!", "Enter name again: ")
-    if d in i:
-        g = 0
-        l = i.get(d)
-        for j in l:
-            g = g + j
-        h = g / 5
-        print(f"Average marks for 1st sem of {d} is {h}")
-    else:
-        print(f"Sorry, {d} could not be found even on the second attempt.")
-#For 2nd Sem
-    s1=[]
-    i1={}
-    k1=0
-    student_names = list(i.keys())
-    for name in student_names:
-        print(f"--- Entering marks for {name} (2nd Sem) ---")
-        b1=get_valid_marks("physics: ")
-        c1=get_valid_marks("chemistry: ")
-        d1=get_valid_marks("maths: ")
-        e1=get_valid_marks("computer: ")
-        f1=get_valid_marks("biology: ")
-        s1.append(b1)
-        s1.append(c1)
-        s1.append(d1)
-        s1.append(e1)
-        s1.append(f1)
-        i1[name]=s1[k1:k1+5: ]
-        k1=k1+5
-    print(i1)
-    #Average for 2nd Sem
-    choice = input("Do you want to find average for 2nd sem?(y/n): ")
-    if choice=='y' or choice=='Y':
-        search_name = input("Do you want to find the same student's average?(y/n): ")
-        if search_name=='y' or search_name=='Y':
-            search_name=d
-            g1=0
-            l1=i1.get(d)
-            for j1 in l1:
-                g1=g1+j1
-                h1=g1/5
-            print(f"Average marks for 2nd sem of {d} is {h1}")
-        else:
-            search_name=input("Enter the student's name: ")
-            g1=0
-            l1=i1.get(search_name)
-            for j1 in l1:
-                g1=g1+j1
-                h1=g1/5
-            print(f"Average marks for 2nd sem of {search_name} is {h1}")
-    #For 3rd Sem
-    s2=[]
-    i2={}
-    k2=0
-    student_names = list(i.keys())
-    for name in student_names:
-        print(f"--- Entering marks for {name} (3rd Sem) ---")
-        b2=get_valid_marks("physics: ")
-        c2=get_valid_marks("chemistry: ")
-        d2=get_valid_marks("maths: ")
-        e2=get_valid_marks("computer: ")
-        f2=get_valid_marks("biology: ")
-        s2.append(b2)
-        s2.append(c2)
-        s2.append(d2)
-        s2.append(e2)
-        s2.append(f2)
-        i2[name]=s2[k2:k2+5: ]
-        k2=k2+5
-    print(i2)
-    #Average for 3rd Sem
-    choice1 = input("Do you want to find average for 3rd sem?(y/n): ")
-    if choice1=='y' or choice1=='Y':
-        search_name1 = input("Do you want to find the same student's average?(y/n): ")
-        if search_name1=='y' or search_name1=='Y':
-            search_name=d
-            g2=0
-            l2=i2.get(d)
-            for j2 in l2:
-                g2=g2+j2
-                h2=g2/5
-            print(f"Average marks for 2nd sem of {d} is {h2}")
-        else:
-            search_name1=input("Enter the student's name: ")
-            g2=0
-            l2=i2.get(search_name1)
-            for j2 in l2:
-                g2=g2+j2
-                h2=g2/5
-            print(f"Average marks for 2nd sem of {search_name1} is {h2}")
-    #For 4th Sem
-    s3=[]
-    i3={}
-    k3=0
-    student_names = list(i.keys())
-    for name in student_names:
-        print(f"--- Entering marks for {name} (4th Sem) ---")
-        b3=get_valid_marks("physics: ")
-        c3=get_valid_marks("chemistry: ")
-        d3=get_valid_marks("maths: ")
-        e3=get_valid_marks("computer: ")
-        f3=get_valid_marks("biology: ")
-        s3.append(b3)
-        s3.append(c3)
-        s3.append(d3)
-        s3.append(e3)
-        s3.append(f3)
-        i3[name]=s3[k3:k3+5: ]
-        k3=k3+5
-    print(i3)
-    #Average for 4th Sem
-    choice2 = input("Do you want to find average for 4th sem?(y/n): ")
-    if choice2=='y' or choice2=='Y':
-        search_name2 = input("Do you want to find the same student's average?(y/n): ")
-        if search_name2=='y' or search_name2=='Y':
-            search_name=d
-            g3=0
-            l3=i3.get(d)
-            for j3 in l3:
-                g3=g3+j3
-                h3=g3/5
-            print(f"Average marks for 4th sem of {d} is {h3}")
-        else:
-            search_name2=input("Enter the student's name: ")
-            g3=0
-            l3=i3.get(search_name2)
-            for j3 in l3:
-                g3=g3+j3
-                h3=g3/5
-            print(f"Average marks for 4th sem of {search_name2} is {h3}")
-    
-    return i,i1,i2,i3
-    
+from functime import flash_and_input
+from funcyn import get_yes_no
 
+def sem_marks():
+    n = get_valid_num_students()
+    
+    # --- SEMESTER 1 ---
+    i = {}
+    s = []
+    k = 0
+    for x in range(n):
+        print(f"\n--- Entering marks for (1st Sem) ---")
+        name = get_valid_names()
+        marks = [get_valid_marks("physics "), get_valid_marks("chemistry "), 
+                 get_valid_marks("maths "), get_valid_marks("computer "), 
+                 get_valid_marks("biology ")]
+        i[name] = marks
+
+    # Memory variable to track the student searched
+    last_target = None 
+
+    ch = get_yes_no("\nDo you want to find average for 1st sem? (y/n): ")
+    if ch == 'y':
+        search = input("Whose average marks do you want to find?: ")
+        if search not in i:
+            search = flash_and_input("Invalid student name!", "Enter name again: ")
+        
+        if search in i:
+            avg = sum(i[search]) / 5
+            print(f"Average marks for 1st sem of {search} is {avg}")
+            last_target = search # Store in memory
+        else:
+            print(f"Sorry, {search} not found.")
+
+    # --- SEMESTER 2 ---
+    i1 = {}
+    for name in i.keys():
+        print(f"\n--- Entering marks for {name} (2nd Sem) ---")
+        marks = [get_valid_marks("physics "), get_valid_marks("chemistry "), 
+                 get_valid_marks("maths "), get_valid_marks("computer "), 
+                 get_valid_marks("biology ")]
+        i1[name] = marks
+
+    ch2 = get_yes_no("\nDo you want to find average for 2nd sem? (y/n): ")
+    if ch2 == 'y':
+        # Check if memory exists
+        if last_target:
+            reuse = get_yes_no(f"Find average for same student ({last_target})? (y/n): ")
+            if reuse == 'y':
+                current_target = last_target
+            else:
+                current_target = input("Enter new student name: ")
+        else:
+            current_target = input("Enter student name: ")
+
+        if current_target in i1:
+            print(f"Average for 2nd sem of {current_target} is {sum(i1[current_target])/5}")
+            last_target = current_target # Update memory
+        else:
+            print("Record not found.")
+
+    # --- SEMESTER 3 ---
+    i2 = {}
+    for name in i.keys():
+        print(f"\n--- Entering marks for {name} (3rd Sem) ---")
+        i2[name] = [get_valid_marks("physics "), get_valid_marks("chemistry "), 
+                    get_valid_marks("maths "), get_valid_marks("computer "), 
+                    get_valid_marks("biology ")]
+
+    ch3 = get_yes_no("\nDo you want to find average for 3rd sem? (y/n): ")
+    if ch3 == 'y':
+        if last_target:
+            reuse = get_yes_no(f"Find average for same student ({last_target})? (y/n): ")
+            current_target = last_target if reuse == 'y' else input("Enter new student name: ")
+        else:
+            current_target = input("Enter student name: ")
+
+        if current_target in i2:
+            print(f"Average for 3rd sem of {current_target} is {sum(i2[current_target])/5}")
+            last_target = current_target
+        else:
+            print("Record not found.")
+
+    # --- SEMESTER 4 ---
+    i3 = {}
+    for name in i.keys():
+        print(f"\n--- Entering marks for {name} (4th Sem) ---")
+        i3[name] = [get_valid_marks("physics "), get_valid_marks("chemistry "), 
+                    get_valid_marks("maths "), get_valid_marks("computer "), 
+                    get_valid_marks("biology ")]
+
+    ch4 = get_yes_no("\nDo you want to find average for 4th sem? (y/n): ")
+    if ch4 == 'y':
+        if last_target:
+            reuse = get_yes_no(f"Find average for same student ({last_target})? (y/n): ")
+            current_target = last_target if reuse == 'y' else input("Enter new student name: ")
+        else:
+            current_target = input("Enter student name: ")
+
+        if current_target in i3:
+            print(f"Average for 4th sem of {current_target} is {sum(i3[current_target])/5}")
+            last_target = current_target
+        else:
+            print("Record not found.")
+
+    return i, i1, i2, i3

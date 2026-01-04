@@ -1,31 +1,40 @@
-#For finding the highest marks received in a semester by a student as per chosen by the user
-def find_highest_per_subject(i, i1, i2, i3): # Receives all dictionaries
-    print("\n----- Subject-wise Highest Marks Search -----")
-    chosen_sem = input("Enter the semester (1, 2, 3, 4): ")
-    
-    # 1. Map chosen_sem to the correct dictionary
-    marks_data = None
-    if chosen_sem == "1": marks_data = i
-    elif chosen_sem == "2": marks_data = i1
-    elif chosen_sem == "3": marks_data = i2
-    elif chosen_sem == "4": marks_data = i3
-    
-    if marks_data is None:
-        print(f"Invalid semester: {chosen_sem}")
-        return
+from functime1 import flash
 
-    # 2. Handle Subject Input
+def find_highest_per_subject(i, i1, i2, i3):
+    print("\n" + "="*40)
+    print(f"{'SUBJECT-WISE HIGHEST MARKS SEARCH':^40}")
+    print("="*40)
+
+    # 1. Loop for Semester Selection
+    sem_prompt = "Enter the semester (1, 2, 3, 4): "
+    while True:
+        chosen_sem = input(sem_prompt)
+        
+        if chosen_sem == "1": marks_data = i; break
+        elif chosen_sem == "2": marks_data = i1; break
+        elif chosen_sem == "3": marks_data = i2; break
+        elif chosen_sem == "4": marks_data = i3; break
+        else:
+            # If invalid, flash error and update the prompt for the next loop
+            flash(f"Invalid semester: {chosen_sem}")
+            sem_prompt = "Enter semester again (1, 2, 3, 4): "
+
+    # 2. Loop for Subject Selection
     subjects = ["physics", "chemistry", "maths", "computer", "biology"]
-    print(f"Available subjects: {', '.join(subjects)}")
-    chosen_sub = input("Enter subject name: ").lower()
-
-    if chosen_sub not in subjects:
-        print(f"Invalid subject: {chosen_sub}")
-        return
+    print(f"\nAvailable: {', '.join(subjects)}")
+    sub_prompt = "Enter subject name: "
     
-    sub_index = subjects.index(chosen_sub)
+    while True:
+        chosen_sub = input(sub_prompt).lower()
+        
+        if chosen_sub in subjects:
+            sub_index = subjects.index(chosen_sub)
+            break
+        else:
+            flash(f"Invalid subject: {chosen_sub}")
+            sub_prompt = "Enter subject name again: "
 
-    # 3. Calculation Logic
+    # 3. Calculation Logic (Remains the same)
     max_subject_mark = -1
     top_stud_names = []
 
@@ -38,8 +47,9 @@ def find_highest_per_subject(i, i1, i2, i3): # Receives all dictionaries
             top_stud_names.append(name)
 
     # 4. Display Result
-    print(f"\nResult for Semester {chosen_sem}:")
+    print("\n" + "-"*30)
+    print(f"RESULT FOR SEMESTER {chosen_sem}")
     print(f"Subject: {chosen_sub.capitalize()}")
     print(f"Highest Marks: {max_subject_mark}")
     print(f"Received by: {', '.join(top_stud_names)}")
-    print(f"---------------------------------------------")
+    print("-"*30)

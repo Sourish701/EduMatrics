@@ -2,7 +2,7 @@ def get_valid_marks(subject_name):
     from functime1 import flash
     
     # The prompt starts as the subject name
-    prompt = f"Enter marks in {subject_name} "
+    prompt = f"Enter marks in {subject_name}: "
     
     while True:
         # ONLY ONE INPUT CALL HERE
@@ -15,12 +15,12 @@ def get_valid_marks(subject_name):
             else:
                 # Number out of range
                 flash("Invalid marks! Please enter marks between 0 and 100.")
-                prompt = "Please enter marks in {subject_name} again: "
+                prompt = f"Please enter marks in {subject_name} again: "
                 
         except ValueError:
             # Not a number (letters/symbols)
             flash("Invalid marks! Please enter numeric values only.")
-            prompt = "Please enter marks in {subject_name} again: "
+            prompt = f"Please enter marks in {subject_name} again: "
 
             
            
