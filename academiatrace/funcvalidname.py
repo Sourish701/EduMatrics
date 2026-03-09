@@ -1,16 +1,16 @@
-def get_valid_names():
-    from functime1 import flash
-    
-    # Start with the standard prompt
-    prompt = "Enter your name: "
-    
-    while True:
-        m = input(prompt)
-        
-        # .isalpha() checks if the string contains ONLY letters
-        if m.isalpha():
-            return m 
+import streamlit as st
+
+def get_valid_names(prompt_text):
+    name = st.text_input(prompt_text)
+
+    if name:
+        clean_name = name.strip()
+
+        # validation
+        if clean_name.replace(" ", "").isalpha():
+            st.success("Valid name entered.")
+            return clean_name
         else:
-          
-            flash("Invalid name! (Alphabets only)")
-            prompt = "Please enter your name again: "
+            st.error("Invalid name! Please enter only alphabets.")
+
+    return None

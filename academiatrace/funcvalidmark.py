@@ -1,26 +1,14 @@
-def get_valid_marks(subject_name):
-    from functime1 import flash
-    
-    # The prompt starts as the subject name
-    prompt = f"Enter marks in {subject_name}: "
-    
-    while True:
-        # ONLY ONE INPUT CALL HERE
-        user_in = input(prompt)
-        
-        try:
-            m = int(user_in)
-            if 0 <= m <= 100:
-                return m
-            else:
-                # Number out of range
-                flash("Invalid marks! Please enter marks between 0 and 100.")
-                prompt = f"Please enter marks in {subject_name} again: "
-                
-        except ValueError:
-            # Not a number (letters/symbols)
-            flash("Invalid marks! Please enter numeric values only.")
-            prompt = f"Please enter marks in {subject_name} again: "
+import streamlit as st
 
-            
-           
+def get_valid_marks(prompt_text):
+    marks = st.number_input(
+        prompt_text,
+        min_value=0,
+        max_value=100,
+        step=1
+    )
+
+    if marks is not None:
+        return int(marks)
+
+    return None
