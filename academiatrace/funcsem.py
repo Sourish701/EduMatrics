@@ -34,7 +34,7 @@ def sem_marks():
         st.subheader("Semester 1 - Enter Student Details")
 
         with st.form("sem1_form"):
-            i = {}
+            student_data = {}
             
             for x in range(n):
                 st.write(f"### Student {x+1}")
@@ -49,21 +49,45 @@ def sem_marks():
                     get_valid_marks("Biology", key=f"s1_bio_{x}")
                 ]
 
-                if name and all(m is not None for m in marks):
-                    i[name] = marks
+                if name:
+                    student_data[x] = {"name": name, "marks": marks}
 
                 st.divider()
 
             submit = st.form_submit_button("✅ Submit Semester 1")
 
         if submit:
-            if i:
+            i = {}
+            errors = []
+            
+            for idx, data in student_data.items():
+                name = data["name"]
+                marks = data["marks"]
+                
+                # Validate name (alphabets only)
+                if not name.replace(" ", "").isalpha():
+                    errors.append(f"❌ Student {idx+1}: Invalid name '{name}'. Use alphabets only!")
+                    continue
+                
+                # Validate marks
+                if not all(m is not None for m in marks):
+                    errors.append(f"❌ Student {idx+1} ({name}): Please enter all marks!")
+                    continue
+                
+                i[name] = marks
+            
+            if errors:
+                for error in errors:
+                    st.error(error)
+                st.warning("Please fix the errors above and resubmit.")
+            elif i:
                 st.session_state.sem1_data = i
                 st.session_state.step = 2
                 st.success(f"✅ Saved {len(i)} students!")
                 st.rerun()
             else:
                 st.error("Please enter at least one valid student!")
+        
         return {}, {}, {}, {}
 
     # SEMESTER 2
@@ -94,10 +118,14 @@ def sem_marks():
             submit = st.form_submit_button("✅ Submit Semester 2")
 
         if submit:
-            st.session_state.sem2_data = i1
-            st.session_state.step = 3
-            st.success(f"✅ Saved semester 2!")
-            st.rerun()
+            if len(i1) == len(i):
+                st.session_state.sem2_data = i1
+                st.session_state.step = 3
+                st.success(f"✅ Saved semester 2!")
+                st.rerun()
+            else:
+                st.error("❌ Please enter marks for ALL students!")
+        
         return {}, {}, {}, {}
 
     # SEMESTER 3
@@ -128,10 +156,14 @@ def sem_marks():
             submit = st.form_submit_button("✅ Submit Semester 3")
 
         if submit:
-            st.session_state.sem3_data = i2
-            st.session_state.step = 4
-            st.success(f"✅ Saved semester 3!")
-            st.rerun()
+            if len(i2) == len(i):
+                st.session_state.sem3_data = i2
+                st.session_state.step = 4
+                st.success(f"✅ Saved semester 3!")
+                st.rerun()
+            else:
+                st.error("❌ Please enter marks for ALL students!")
+        
         return {}, {}, {}, {}
 
     # SEMESTER 4
@@ -166,15 +198,21 @@ def sem_marks():
                 view_avg = st.form_submit_button("📊 View Averages")
 
         if submit:
-            st.session_state.sem4_data = i3
-            st.session_state.step = 5
-            st.success(f"✅ Saved semester 4!")
-            st.rerun()
+            if len(i3) == len(i):
+                st.session_state.sem4_data = i3
+                st.session_state.step = 5
+                st.success(f"✅ Saved semester 4!")
+                st.rerun()
+            else:
+                st.error("❌ Please enter marks for ALL students!")
 
         if view_avg:
-            st.session_state.sem4_data = i3
-            st.session_state.step = 5
-            st.rerun()
+            if len(i3) == len(i):
+                st.session_state.sem4_data = i3
+                st.session_state.step = 5
+                st.rerun()
+            else:
+                st.error("❌ Please enter marks for ALL students first!")
 
         return {}, {}, {}, {}
 

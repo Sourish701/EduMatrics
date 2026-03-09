@@ -11,11 +11,10 @@ def get_valid_names(prompt_text, key=None):
     if name:
         clean_name = name.strip()
 
-        # validation
+        # validation - just return None if invalid, don't show error (errors don't work well in forms)
         if clean_name.replace(" ", "").isalpha():
             return clean_name
         else:
-            st.error(f"Invalid name: {name}. Use alphabets only!")
-            return None
+            return None  # Invalid name
 
     return None
