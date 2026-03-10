@@ -143,7 +143,7 @@ def generate_report_card(i, i1, i2, i3):
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            st.metric("Total Marks", f"{total_marks}/400")
+            st.metric("Total Marks", f"{total_marks}/2000")
         with col2:
             st.metric("Overall Average", f"{overall_avg:.2f}/100")
         with col3:
