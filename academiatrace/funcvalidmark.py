@@ -4,7 +4,7 @@ def get_valid_marks(prompt_text, key=None):
     """
     Get valid marks (0-100)
     Accepts direct keyboard input
-    Returns None if invalid, so form validation can handle it
+    Validates input properly
     """
     marks_input = st.text_input(
         prompt_text,
@@ -14,13 +14,15 @@ def get_valid_marks(prompt_text, key=None):
     )
     
     if marks_input == "":
-        return None
+        return 0  # Default to 0 if empty (will be caught later)
     
     try:
         marks = int(marks_input)
         if 0 <= marks <= 100:
             return marks
         else:
-            return None  # Will be caught by form validation
+            st.error(f"❌ Marks must be between 0-100, got {marks}")
+            return None
     except ValueError:
-        return None  # Will be caught by form validation
+        st.error(f"❌ Invalid input: '{marks_input}'. Please enter a valid number.")
+        return None
