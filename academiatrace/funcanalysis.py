@@ -5,11 +5,21 @@ def analysis(i, i1, i2, i3):
 
     st.markdown("## STUDENT PERFORMANCE ANALYSIS (ALL SEMESTERS)")
 
+    # Check if data is valid
+    if not i or not i1 or not i2 or not i3:
+        st.error("❌ All semester data is required for analysis!")
+        return
+
     # 1. Calculate cumulative totals
     cumulative_totals = {}
     for name in i.keys():
         total = sum(i[name]) + sum(i1[name]) + sum(i2[name]) + sum(i3[name])
         cumulative_totals[name] = total
+
+    # Check if cumulative_totals is empty
+    if not cumulative_totals:
+        st.error("❌ No student data found!")
+        return
 
     overall_top_student = max(cumulative_totals, key=cumulative_totals.get)
     top_score = cumulative_totals[overall_top_student]
@@ -82,7 +92,7 @@ def analysis(i, i1, i2, i3):
         else:
             st.error(f"Student name '{analysis_name}' not found.")
 
-    # 5. If only one student
+    # If only one student
     if len(cumulative_totals) == 1:
         sole_student = list(cumulative_totals.keys())[0]
         st.info(

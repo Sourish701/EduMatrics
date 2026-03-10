@@ -17,18 +17,23 @@ st.header("Data Entry Module")
 if "data" not in st.session_state:
     st.session_state.data = None
 
-if st.button("Start Data Entry"):
-    st.session_state.data = funcsem.sem_marks()
-    st.success("Data entry completed!")
+if "data_entry_started" not in st.session_state:
+    st.session_state.data_entry_started = False
 
-if st.session_state.data:
-    i, i1, i2, i3 = st.session_state.data
+# Get data from sem_marks (this runs the form steps)
+i, i1, i2, i3 = funcsem.sem_marks()
 
+# Only process analysis if ALL 4 semesters have data
+if i and i1 and i2 and i3:
+    # Store complete data in session state
+    st.session_state.data = (i, i1, i2, i3)
+    st.session_state.data_entry_started = True
     
-
+    # Now show all the analysis sections
+    
     # STEP 2: SEMESTER TOPPERS
     st.header("Toppers in Each Semester")
-
+    
     funchighpsem.highest_in_1stsem(i)
     funchighpsem.highest_in_2ndsem(i1)
     funchighpsem.highest_in_3rdsem(i2)
@@ -45,3 +50,8 @@ if st.session_state.data:
     # STEP 5: STUDENT ANALYSIS
     st.header("Full Student Performance Analysis")
     funcanalysis.analysis(i, i1, i2, i3)
+
+elif st.session_state.data_entry_started:
+    st.info("Please complete all 4 semesters to view analysis...")
+else:
+    st.info("Start entering student marks above to begin!")

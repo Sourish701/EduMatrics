@@ -126,7 +126,7 @@ def sem_marks():
             else:
                 st.error("❌ Please enter marks for ALL students!")
         
-        return {}, {}, {}, {}
+        return st.session_state.sem1_data, {}, {}, {}
 
     # SEMESTER 3
     if st.session_state.step == 3:
@@ -164,7 +164,7 @@ def sem_marks():
             else:
                 st.error("❌ Please enter marks for ALL students!")
         
-        return {}, {}, {}, {}
+        return st.session_state.sem1_data, st.session_state.sem2_data, {}, {}
 
     # SEMESTER 4
     if st.session_state.step == 4:
@@ -214,7 +214,7 @@ def sem_marks():
             else:
                 st.error("❌ Please enter marks for ALL students first!")
 
-        return {}, {}, {}, {}
+        return st.session_state.sem1_data, st.session_state.sem2_data, st.session_state.sem3_data, {}
 
     # STEP 5: View Averages
     if st.session_state.step == 5:
