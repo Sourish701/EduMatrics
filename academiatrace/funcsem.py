@@ -285,8 +285,66 @@ def sem_marks():
 
         return st.session_state.sem1_data, st.session_state.sem2_data, st.session_state.sem3_data, {}
 
-    # STEP 5: All data complete - return for analysis
+    # STEP 5: Ask about report cards
     if st.session_state.step == 5:
+        st.subheader("🎓 Data Entry Complete!")
+        st.success("✅ All student marks have been entered successfully!")
+        
+        st.divider()
+        
+        col1, col2, col3 = st.columns([1, 1, 1])
+        
+        with col1:
+            if st.button("📋 View Report Cards", use_container_width=True, key="view_cards"):
+                st.session_state.step = 6
+                st.rerun()
+        
+        with col2:
+            if st.button("📊 View Analysis", use_container_width=True, key="view_analysis"):
+                st.session_state.step = 7
+                st.rerun()
+        
+        with col3:
+            if st.button("🔄 Start Over", use_container_width=True, key="restart_btn"):
+                st.session_state.step = 0
+                st.session_state.data_entry_started = False
+                st.session_state.num_students_saved = 0
+                st.rerun()
+        
+        st.info("👆 Choose what you'd like to do next")
+        return {}, {}, {}, {}
+
+    # STEP 6: View Report Cards
+    if st.session_state.step == 6:
+        from funcreportcard import generate_report_card
+        
+        i = st.session_state.sem1_data
+        i1 = st.session_state.sem2_data
+        i2 = st.session_state.sem3_data
+        i3 = st.session_state.sem4_data
+        
+        generate_report_card(i, i1, i2, i3)
+        
+        st.divider()
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("📊 Go to Analysis", use_container_width=True):
+                st.session_state.step = 7
+                st.rerun()
+        
+        with col2:
+            if st.button("🔄 Start Over", use_container_width=True):
+                st.session_state.step = 0
+                st.session_state.data_entry_started = False
+                st.session_state.num_students_saved = 0
+                st.rerun()
+        
+        return i, i1, i2, i3
+
+    # STEP 7: Return data for analysis in main.py
+    if st.session_state.step == 7:
         i = st.session_state.sem1_data
         i1 = st.session_state.sem2_data
         i2 = st.session_state.sem3_data
