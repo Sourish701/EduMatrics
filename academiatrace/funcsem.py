@@ -69,9 +69,10 @@ def sem_marks():
                     errors.append(f"❌ Student {idx+1}: Invalid name '{name}'. Use alphabets only!")
                     continue
                 
-                # Validate marks
-                if not all(m is not None for m in marks):
-                    errors.append(f"❌ Student {idx+1} ({name}): Please enter all marks!")
+                # Validate marks - check if any are None or invalid
+                invalid_marks = [m for m in marks if m is None]
+                if invalid_marks or any(m < 0 or m > 100 for m in marks if m is not None):
+                    errors.append(f"❌ Student {idx+1} ({name}): Please enter valid marks (0-100 for all subjects)!")
                     continue
                 
                 i[name] = marks

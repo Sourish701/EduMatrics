@@ -3,18 +3,24 @@ import streamlit as st
 def get_valid_marks(prompt_text, key=None):
     """
     Get valid marks (0-100)
-    Only works inside forms
-    MUST pass a unique key parameter!
+    Accepts direct keyboard input
+    Returns None if invalid, so form validation can handle it
     """
-    marks = st.number_input(
+    marks_input = st.text_input(
         prompt_text,
-        min_value=0,
-        max_value=100,
-        step=1,
-        key=key
+        value="",
+        key=key,
+        placeholder="0-100"
     )
-
-    if marks is not None:
-        return int(marks)
-
-    return None
+    
+    if marks_input == "":
+        return None
+    
+    try:
+        marks = int(marks_input)
+        if 0 <= marks <= 100:
+            return marks
+        else:
+            return None  # Will be caught by form validation
+    except ValueError:
+        return None  # Will be caught by form validation
