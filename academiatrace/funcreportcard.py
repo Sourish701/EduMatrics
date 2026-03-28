@@ -172,21 +172,25 @@ def generate_report_card(i, i1, i2, i3):
         st.subheader("📌 Performance Analysis")
         
         # Strongest subject
-        strongest = max(subject_totals, key=subject_totals.get)
-        strongest_total = subject_totals[strongest]
-        
-        # Weakest subject
-        weakest = min(subject_totals, key=subject_totals.get)
-        weakest_total = subject_totals[weakest]
+        # Strongest subject(s)
+        max_marks = max(subject_totals.values())
+        strongest_subjects = [sub for sub, marks in subject_totals.items() if marks == max_marks]
+
+        # Weakest subject(s)
+        min_marks = min(subject_totals.values())
+        weakest_subjects = [sub for sub, marks in subject_totals.items() if marks == min_marks]
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.success(f"✅ **Strongest Subject:** {strongest} ({strongest_total}/400)")
-        
+            st.success(
+        f"✅ **Strongest Subject(s):** {', '.join(strongest_subjects)} ({max_marks}/400)"
+    )
+
         with col2:
-            st.warning(f"⚠️ **Subject to Improve:** {weakest} ({weakest_total}/400)")
-        
+            st.warning(
+        f"⚠️ **Subject(s) to Improve:** {', '.join(weakest_subjects)} ({min_marks}/400)"
+    )
         # Comparison with class average
         class_avg = sum(cumulative_totals.values()) / len(cumulative_totals)
         student_total = cumulative_totals[selected_student]
@@ -241,8 +245,13 @@ def generate_report_card(i, i1, i2, i3):
         else:
             st.error("🎯 You need to focus more on your studies, especially in weak subjects.")
         
-        st.write(f"- **Focus on {weakest}:** This is your weakest subject. Dedicate more time to understanding core concepts.")
-        st.write(f"- **Leverage your strength in {strongest}:** Use your proficiency in {strongest} to help you understand similar concepts in other subjects.")
+        st.write(
+    f"- **Focus on {', '.join(weakest_subjects)}:** These are the subject(s) needing most improvement."
+)
+
+        st.write(
+    f"- **Leverage your strength in {', '.join(strongest_subjects)}:** Use these strong subject(s) to boost confidence."
+)
         st.write("- **Consistent study:** Maintain a regular study schedule to ensure steady improvement across all semesters.")
         st.write("- **Seek help:** Don't hesitate to ask teachers or peers for help in subjects where you're struggling.")
 
