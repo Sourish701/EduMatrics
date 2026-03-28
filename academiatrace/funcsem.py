@@ -2,7 +2,7 @@ import streamlit as st
 from funcvalidmark import get_valid_marks
 from funcvalidname import get_valid_names
 from funcvalidnum import get_valid_num_students
-from funcyn import get_yes_no
+
 
 def sem_marks():
     
